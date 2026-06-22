@@ -1,0 +1,17 @@
+{
+  "name": "react-ref-repo",
+  "version": "1.0.3",
+  "description": "react ref repo",
+  "keywords": [
+    "react",
+    "ref",
+    "repo"
+  ],
+  "license": "MIT",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "testfunction"
+  }
+}

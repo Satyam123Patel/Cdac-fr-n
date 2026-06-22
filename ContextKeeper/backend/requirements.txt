@@ -1,0 +1,12 @@
+chromadb
+huggingface_hub
+python-dotenv
+PyGithub
+sentence-transformers
+python-dateutil
+requests
+slack-sdk
+pymongo
+aiohttp
+notion-client
+transformers

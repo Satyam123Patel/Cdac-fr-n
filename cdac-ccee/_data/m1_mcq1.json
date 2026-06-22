@@ -1,0 +1,442 @@
+[
+  {
+    "question": "What is the result of the following operation regarding byte overflow?\n```java\nbyte a = 127;\nbyte b = 1;\nbyte c = (byte)(a + b);\nSystem.out.println(c);\n```",
+    "options": [
+      "128",
+      "-128",
+      "1",
+      "Compile Time Error"
+    ],
+    "answer": 1,
+    "explanation": "In Java, bytes are signed 8-bit integers (range -128 to 127). Adding 1 to 127 results in 128 (binary 10000000), which is interpreted as -128 in two's complement notation (overflow)."
+  },
+  {
+    "question": "Which of the following creates a valid `main` method entry point?\n```java\n// A\npublic static void main(String... args)\n// B\nstatic public void main(String[] args)\n// C\npublic static final void main(String[] data)\n// D\nAll of the above\n```",
+    "options": [
+      "A only",
+      "A and B only",
+      "A, B and C",
+      "D (All of the above)"
+    ],
+    "answer": 3,
+    "explanation": "All are valid. Varargs (`...`) are compatible with arrays. `static public` is valid (modifiers can be swapped). `final` is permitted on the main method."
+  },
+  {
+    "question": "Analyze the code snippet related to short-circuit operators:\n```java\nint x = 10;\nif(++x > 10 || ++x < 15) {\n    System.out.println(x);\n}\n```",
+    "options": [
+      "10",
+      "11",
+      "12",
+      "Compile Error"
+    ],
+    "answer": 1,
+    "explanation": "The `||` operator short-circuits. Since `++x` (which becomes 11) is `> 10` (true), the condition is satisfied immediately. The second part `++x < 15` is NEVER executed. Thus `x` remains 11."
+  },
+  {
+    "question": "What happens when you compile and run this code regarding Array Initialization?\n```java\nint[] arr = new int[2];\nSystem.out.println(arr[0] + \" \" + arr.length);\nint[] arr2 = new int[]{1, 2}; // Line A\nint[] arr3 = {1, 2};          // Line B\n```",
+    "options": [
+      "0 2",
+      "null 2",
+      "Line A causes error",
+      "Line B causes error"
+    ],
+    "answer": 0,
+    "explanation": "`int` arrays are initialized to 0. `arr.length` gives the size (2). Both Line A (anonymous array syntax) and Line B (shortcut syntax) are valid."
+  },
+  {
+    "question": "Predict the output regarding Static vs Instance blocks execution order:\n```java\nclass Test {\n    static { System.out.print(\"S1 \"); }\n    { System.out.print(\"I1 \"); }\n    public Test() { System.out.print(\"C1 \"); }\n    public static void main(String[] args) {\n        new Test();\n        new Test();\n    }\n}\n```",
+    "options": [
+      "S1 I1 C1 I1 C1",
+      "S1 I1 C1 S1 I1 C1",
+      "I1 C1 S1 I1 C1",
+      "S1 C1 I1 C1 I1"
+    ],
+    "answer": 0,
+    "explanation": "Static blocks run once when the class is loaded. Instance blocks (`{}`) run before the constructor *every time* an object is created. Output: Static(once) -> Instance -> Constructor -> Instance -> Constructor."
+  },
+  {
+    "question": "Regarding variable scope and shadowing in Inheritance:\n```java\nclass Parent { int x = 10; }\nclass Child extends Parent { \n    int x = 20; \n}\npublic class Main {\n    public static void main(String[] args) {\n        Parent p = new Child();\n        System.out.println(p.x);\n    }\n}\n```",
+    "options": [
+      "10",
+      "20",
+      "Compile Time Error",
+      "Runtime Exception"
+    ],
+    "answer": 0,
+    "explanation": "In Java, variables are not polymorphic. The reference type determines which variable is accessed. Since `p` is of type `Parent`, `p.x` refers to Parent's `x`, even though the runtime object is `Child`."
+  },
+  {
+    "question": "Identify the outcome of this String comparison:\n```java\nString s1 = \"Java\";\nString s2 = new String(\"Java\");\nString s3 = s2.intern();\n\nSystem.out.print((s1 == s2) + \" \" + (s1 == s3));\n```",
+    "options": [
+      "true true",
+      "false false",
+      "false true",
+      "true false"
+    ],
+    "answer": 2,
+    "explanation": "`s1` is in the String Constant Pool. `s2` is in Heap (different reference, so `s1 == s2` is false). `intern()` looks up the value in the pool and returns that reference. Since \"Java\" is already in the pool (s1), `s3` points to `s1`, making `s1 == s3` true."
+  },
+  {
+    "question": "Which statement about the `finalize()` method is TRUE?",
+    "options": [
+      "It is guaranteed to be called before garbage collection.",
+      "It can be called multiple times for the same object.",
+      "It is deprecated in newer Java versions (Java 9+).",
+      "It is used to force Garbage Collection."
+    ],
+    "answer": 2,
+    "explanation": "`finalize()` is deprecated because it is unpredictable, slow, and unsafe. There is no guarantee it will run promptly, and it is run at most once per object. It is replaced by `Cleaner` or `PhantomReference` mechanisms."
+  },
+  {
+    "question": "What is the result of the following Pass-By-Value scenario?\n```java\npublic static void modify(StringBuilder s) {\n    s = new StringBuilder(\"World\");\n    s.append(\"!\");\n}\npublic static void main(String[] args) {\n    StringBuilder sb = new StringBuilder(\"Hello\");\n    modify(sb);\n    System.out.println(sb);\n}\n```",
+    "options": [
+      "Hello",
+      "World!",
+      "HelloWorld!",
+      "Hello!"
+    ],
+    "answer": 0,
+    "explanation": "Java passes references by value. In `modify`, the local reference `s` is reassigned to a NEW object. This reassignment DOES NOT affect the original `sb` reference in `main`. `sb` still points to 'Hello'."
+  },
+  {
+    "question": "Consider the following regarding Functional Interfaces:\n```java\n@FunctionalInterface\ninterface Math {\n    int operate(int a, int b);\n    default void print() { System.out.println(\"Print\"); }\n    static void log() { System.out.println(\"Log\"); }\n    String toString(); \n}\n```",
+    "options": [
+      "Compilation Error: too many methods",
+      "Compilation Error: toString is Object class method",
+      "Compiles Successfully",
+      "Compilation Error: static methods not allowed"
+    ],
+    "answer": 2,
+    "explanation": "A Functional Interface must have exactly ONE abstract method. `default` and `static` methods don't count. Overriding methods from `java.lang.Object` (like `toString`) as abstract is allowed and does not count towards the limit."
+  },
+  {
+    "question": "What is the output of this Exception Handling code?\n```java\ntry {\n    System.out.print(\"A\");\n    throw new RuntimeException();\n} catch (Exception e) {\n    System.out.print(\"B\");\n    System.exit(0);\n} finally {\n    System.out.print(\"C\");\n}\n```",
+    "options": [
+      "ABC",
+      "AB",
+      "AC",
+      "BC"
+    ],
+    "answer": 1,
+    "explanation": "`System.exit(0)` terminates the JVM immediately. This is one of the very few cases where the `finally` block is NOT executed."
+  },
+  {
+    "question": "Regarding Java 8 Streams, what is the output?\n```java\nStream.of(\"a\", \"b\", \"c\")\n    .peek(System.out::print)\n    .map(String::toUpperCase);\n```",
+    "options": [
+      "abc",
+      "ABC",
+      "abcABC",
+      "Nothing is printed"
+    ],
+    "answer": 3,
+    "explanation": "Streams are lazy. Without a **terminal operation** (like `collect`, `forEach`, `count`), intermediate operations like `peek` and `map` are never executed."
+  },
+  {
+    "question": "Which collection allows null keys and null values?",
+    "options": [
+      "ConcurrentHashMap",
+      "TreeMap",
+      "Hashtable",
+      "HashMap"
+    ],
+    "answer": 3,
+    "explanation": "`HashMap` allows one null key and multiple null values. `Hashtable` and `ConcurrentHashMap` throw NullPointerException for any nulls. `TreeMap` throws NPE for null keys (sorting requirement)."
+  },
+  {
+    "question": "What happens in this Threading scenario?\n```java\nThread t = new Thread(() -> System.out.println(\"Run\"));\nt.start();\nt.start();\n```",
+    "options": [
+      "Run Run",
+      "Run (then Exception)",
+      "Run (silent failure)",
+      "Compilation Error"
+    ],
+    "answer": 1,
+    "explanation": "A Thread can only be started once. Calling `start()` on a thread that has already been started (even if it finished) throws `IllegalThreadStateException`."
+  },
+  {
+    "question": "Generics: Which assignment is valid given `class Dog extends Animal`?",
+    "options": [
+      "List<Animal> list = new ArrayList<Dog>();",
+      "List<? extends Animal> list = new ArrayList<Dog>();",
+      "List<Dog> list = new ArrayList<Animal>();",
+      "List<Object> list = new ArrayList<Animal>();"
+    ],
+    "answer": 1,
+    "explanation": "Generic types are invariant. `List<Animal>` is NOT a supertype of `List<Dog>`. To allow a list of a subtype, you must use the upper-bounded wildcard `? extends Animal`."
+  },
+  {
+    "question": "What is the output of overloading resolution?\n```java\nvoid print(Object o) { System.out.print(\"Obj\"); }\nvoid print(String s) { System.out.print(\"Str\"); }\n\npublic static void main(String[] args) {\n    new Test().print(null);\n}\n```",
+    "options": [
+      "Obj",
+      "Str",
+      "Ambiguous Compile Error",
+      "Runtime Exception"
+    ],
+    "answer": 1,
+    "explanation": "Java selects the **most specific** method. `String` is a subclass of `Object`, making it more specific. Therefore, `print(String)` is chosen for `null`."
+  },
+  {
+    "question": "Access Modifiers: If a member is `protected`, where can it be accessed?",
+    "options": [
+      "Only within the same class",
+      "Same package only",
+      "Same package + Subclasses in different packages",
+      "Everywhere"
+    ],
+    "answer": 2,
+    "explanation": "`protected` allows access to classes in the same package AND to subclasses in any package (via inheritance/`this`, not via reference)."
+  },
+  {
+    "question": "Inner Classes: Which statement is FALSE?",
+    "options": [
+      "Anonymous inner classes can implement multiple interfaces.",
+      "Static nested classes can access private static members of the outer class.",
+      "Member inner classes cannot have static declarations (before Java 16).",
+      "Method-local inner classes can only access final/effectively final local variables."
+    ],
+    "answer": 0,
+    "explanation": "Anonymous inner classes can either extend one class OR implement exactly one interface. They cannot do both, nor implement multiple interfaces."
+  },
+  {
+    "question": "Serialization: How do you prevent a field from being serialized?",
+    "options": [
+      "Make it static",
+      "Make it transient",
+      "Make it volatile",
+      "Both A and B"
+    ],
+    "answer": 3,
+    "explanation": "`static` variables belong to the class, not the instance state, so they are not serialized. `transient` is the specific keyword to mark instance variables as non-serializable."
+  },
+  {
+    "question": "What is the output regarding default interface methods?\n```java\ninterface A { default void hello() { System.out.print(\"A\"); } }\ninterface B { default void hello() { System.out.print(\"B\"); } }\n\nclass C implements A, B {\n    // No implementation\n}\n// Inside main: new C().hello();\n```",
+    "options": [
+      "A",
+      "B",
+      "AB",
+      "Compile Error"
+    ],
+    "answer": 3,
+    "explanation": "This is the 'Diamond Problem'. If two interfaces provide a default method with the same signature, the implementing class MUST override the method to resolve the ambiguity."
+  },
+  {
+    "question": "Reflection: Can you access a private field of a class using Reflection?",
+    "options": [
+      "No, private means private.",
+      "Yes, by using `setAccessible(true)`.",
+      "Yes, but only from a subclass.",
+      "Yes, but only if the SecurityManager permits."
+    ],
+    "answer": 1,
+    "explanation": "Reflection allows bypassing encapsulation. By calling `field.setAccessible(true)`, you can read/write private fields."
+  },
+  {
+    "question": "Which of the following creates a truly immutable List in Java 9+?",
+    "options": [
+      "Collections.unmodifiableList(list)",
+      "List.of(1, 2, 3)",
+      "Arrays.asList(1, 2, 3)",
+      "new ArrayList().freeze()"
+    ],
+    "answer": 1,
+    "explanation": "`List.of(...)` creates a truly immutable list. `Collections.unmodifiableList` is just a view (if the underlying list changes, the view changes)."
+  },
+  {
+    "question": "Thread States: A thread enters the WAITING state when calling:",
+    "options": [
+      "Thread.sleep()",
+      "Object.wait()",
+      "Thread.yield()",
+      "socket.read()"
+    ],
+    "answer": 1,
+    "explanation": "`wait()` puts thread in WAITING. `sleep()` puts it in TIMED_WAITING. `yield()` keeps it in RUNNABLE."
+  },
+  {
+    "question": "Wrapper Classes: What is the result?\n```java\nInteger a = 100, b = 100;\nInteger c = 200, d = 200;\nSystem.out.println((a==b) + \" \" + (c==d));\n```",
+    "options": [
+      "true true",
+      "false false",
+      "true false",
+      "false true"
+    ],
+    "answer": 2,
+    "explanation": "Java caches Integer objects between -128 and 127. `a` and `b` share the same cached object. `c` and `d` (200) are outside the cache, so new instances are created."
+  },
+  {
+    "question": "Exception Hierarchy: Which catch block creates a compile error?\n```java\ntry {\n    throw new FileNotFoundException();\n} catch (IOException e) {\n} catch (FileNotFoundException e) { \n}\n```",
+    "options": [
+      "The IOException block",
+      "The FileNotFoundException block",
+      "Both",
+      "None"
+    ],
+    "answer": 1,
+    "explanation": "`FileNotFoundException` is a subclass of `IOException`. Since `IOException` is caught first, the second block is **unreachable code**, which is a compile error."
+  },
+  {
+    "question": "Garbage Collection: What is the 'Island of Isolation'?",
+    "options": [
+      "Objects in the Old Gen space.",
+      "A group of objects referencing each other but not reachable from any GC root.",
+      "ThreadLocal variables.",
+      "Objects finalized but not yet collected."
+    ],
+    "answer": 1,
+    "explanation": "An Island of Isolation occurs when objects A and B reference each other, but neither is referenced by the main stack/program. They are eligible for GC despite having references."
+  },
+  {
+    "question": "Comparator vs Comparable: Which signature is correct for `Comparator`?",
+    "options": [
+      "int compareTo(T o)",
+      "int compare(T o1, T o2)",
+      "boolean equals(T o1, T o2)",
+      "int sort(T o1, T o2)"
+    ],
+    "answer": 1,
+    "explanation": "`Comparable` uses `compareTo(T o)` (natural ordering). `Comparator` uses `compare(T o1, T o2)` (custom ordering)."
+  },
+  {
+    "question": "What is the output of this Polymorphism snippet?\n```java\nclass A { void foo() throws IOException {} }\nclass B extends A { \n    void foo() throws Exception {} \n}\n```",
+    "options": [
+      "Compiles successfully",
+      "Compile Error in B",
+      "Runtime Error",
+      "Warning"
+    ],
+    "answer": 1,
+    "explanation": "Overriding rule: The overriding method cannot throw a **broader** (super) checked exception than the parent method. `Exception` is broader than `IOException`."
+  },
+  {
+    "question": "Which keyword guarantees visibility of changes to variables across threads?",
+    "options": [
+      "static",
+      "final",
+      "volatile",
+      "transient"
+    ],
+    "answer": 2,
+    "explanation": "`volatile` ensures that the value of a variable is always read from main memory, not from a thread's local cache, establishing a 'happens-before' relationship."
+  },
+  {
+    "question": "NIO: Which Buffer method switches from writing mode to reading mode?",
+    "options": [
+      "clear()",
+      "reset()",
+      "flip()",
+      "rewind()"
+    ],
+    "answer": 2,
+    "explanation": "`flip()` sets the limit to the current position and sets the position to 0. It prepares the buffer to be read (drained) after it has been written to."
+  },
+  {
+    "question": "Java 8: `Optional.ofNullable(null).orElse(\"Other\")` returns:",
+    "options": [
+      "null",
+      "\"Other\"",
+      "Throws NPE",
+      "Optional[\"Other\"]"
+    ],
+    "answer": 1,
+    "explanation": "`ofNullable(null)` creates an empty Optional. `orElse` returns the fallback value (\"Other\") if the Optional is empty."
+  },
+  {
+    "question": "Abstract Class vs Interface (Java 8+): What is the main structural difference?",
+    "options": [
+      "Abstract classes can have default methods, Interfaces cannot.",
+      "Abstract classes can have constructors, Interfaces cannot.",
+      "Interfaces can have instance variables, Abstract classes cannot.",
+      "Interfaces can have static blocks."
+    ],
+    "answer": 1,
+    "explanation": "Interfaces cannot have constructors as they do not hold state. Abstract classes are part of the class hierarchy and have constructors."
+  },
+  {
+    "question": "What happens if you remove an element from an ArrayList while iterating with a for-each loop?",
+    "options": [
+      "Element is removed successfully.",
+      "Compile Time Error.",
+      "ConcurrentModificationException.",
+      "ArrayOutOfBoundsException."
+    ],
+    "answer": 2,
+    "explanation": "Modifying the collection directly (via `list.remove`) while iterating invalidates the iterator used by the for-each loop, causing a `ConcurrentModificationException`."
+  },
+  {
+    "question": "Constructor Chaining: What is the first line of every constructor (if not specified)?",
+    "options": [
+      "this()",
+      "super()",
+      "new Object()",
+      "Nothing"
+    ],
+    "answer": 1,
+    "explanation": "The compiler inserts a call to `super()` (the no-arg constructor of the parent class) if the developer does not explicitly write `this(...)` or `super(...)`."
+  },
+  {
+    "question": "Streams: What does `reduce` do?",
+    "options": [
+      "Filters elements",
+      "Transforms elements one by one",
+      "Combines elements into a single result",
+      "Sorts the stream"
+    ],
+    "answer": 2,
+    "explanation": "`reduce` is a terminal operation that aggregates the stream elements into a single result using an associative accumulation function (e.g., sum, max, concatenation)."
+  },
+  {
+    "question": "Code Analysis: Loop Unreachable Code\n```java\nwhile(false) {\n    System.out.println(\"Hi\");\n}\n```",
+    "options": [
+      "Prints nothing",
+      "Infinite Loop",
+      "Compile Time Error",
+      "Runtime Exception"
+    ],
+    "answer": 2,
+    "explanation": "In Java, `while(false)` is explicitly detected as unreachable code by the compiler, resulting in an error. `if(false)` is allowed (dead code), but `while` is stricter."
+  },
+  {
+    "question": "Try-Catch: What does `catch(Exception | IOException e)` do?",
+    "options": [
+      "Catches both exceptions (Multi-catch)",
+      "Compile Error",
+      "Catches Exception then IOException",
+      "Valid Java 7 Syntax"
+    ],
+    "answer": 1,
+    "explanation": "In a Multi-catch block, the exceptions must be **disjoint**. Since `IOException` is a subclass of `Exception`, this is redundant and causes a compile error."
+  },
+  {
+    "question": "Enum: Can an Enum extend a class?",
+    "options": [
+      "Yes, any class.",
+      "Yes, but only abstract classes.",
+      "No, Enums implicitly extend java.lang.Enum.",
+      "No, Enums are primitives."
+    ],
+    "answer": 2,
+    "explanation": "Java does not support multiple inheritance of state. Since all enums implicitly extend `java.lang.Enum`, they cannot extend any other class."
+  },
+  {
+    "question": "What output does this produce?\n```java\nint x = 5;\nSystem.out.println(x > 2 ? x < 4 ? 10 : 8 : 7);\n```",
+    "options": [
+      "10",
+      "8",
+      "7",
+      "5"
+    ],
+    "answer": 1,
+    "explanation": "Nested Ternary: `x > 2` is true (5 > 2). We enter the first branch: `x < 4 ? 10 : 8`. Since 5 is not < 4, we take the else branch: 8."
+  },
+  {
+    "question": "Method References: `System.out::println` is equivalent to which Lambda?",
+    "options": [
+      "x -> System.out.println(x)",
+      "() -> System.out.println()",
+      "x -> System.out.println()",
+      "(x, y) -> System.out.println(x)"
+    ],
+    "answer": 0,
+    "explanation": "This is an instance method reference. It expects one argument and passes it directly to `System.out.println`."
+  }
+]

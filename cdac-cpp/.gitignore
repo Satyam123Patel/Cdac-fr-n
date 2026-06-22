@@ -1,0 +1,35 @@
+# Compiled executables
+*.exe
+*.out
+*.o
+*.obj
+
+# Object files
+*.ko
+*.so
+*.so.*
+*.dylib
+
+# Precompiled headers
+*.gch
+*.pch
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build directories
+build/
+dist/
+bin/
+
+# Debugging files
+*.dSYM/
+
+# Temporary files
+*.tmp
+*.bak

@@ -1,0 +1,442 @@
+[
+  {
+    "question": "You are implementing a banking transfer in JDBC. You have set `conn.setAutoCommit(false)`. During the transaction, the debit succeeds, but the credit fails, throwing a SQLException. If you catch the exception but forget to call `conn.rollback()`, what is the most likely outcome in the database?",
+    "options": [
+      "The database automatically rolls back the changes when the connection closes.",
+      "The debit operation remains in a 'pending' state indefinitely locking the row.",
+      "The debit is committed because the Java program finished execution.",
+      "The database throws a `TransactionTimeoutException` immediately."
+    ],
+    "answer": 0,
+    "explanation": "While explicit rollback is best practice, if a connection is closed (or returned to a pool) with uncommitted changes, most standard JDBC drivers/databases will implicitly roll back the transaction. However, relying on this is bad design."
+  },
+  {
+    "question": "Consider the following code snippet: `PreparedStatement ps = conn.prepareStatement(\"SELECT * FROM users WHERE name = ?\");` Why is this preferred over `Statement` for a search feature?",
+    "options": [
+      "It allows the database to pre-compile the SQL, improving performance for repeated execution, and neutralizes SQL Injection.",
+      "It automatically manages the database connection pool.",
+      "It allows the usage of Named Parameters (e.g., :name) which standard JDBC supports natively.",
+      "It is the only way to execute SELECT queries in JDBC."
+    ],
+    "answer": 0,
+    "explanation": "The primary dual benefits are: 1) Pre-compilation (performance) and 2) Separating code from data (security against SQL Injection)."
+  },
+  {
+    "question": "In the Data Access Object (DAO) pattern, which design principle is primarily being satisfied by hiding JDBC low-level exceptions (SQLException) and throwing custom application runtime exceptions instead?",
+    "options": [
+      "Singleton Pattern",
+      "Interface Segregation",
+      "Encapsulation / Abstraction",
+      "Observer Pattern"
+    ],
+    "answer": 2,
+    "explanation": "The service layer should not know *how* data is fetched. Leaking `SQLException` to the service layer breaks abstraction; wrapping it in a RuntimeException decouples the layers."
+  },
+  {
+    "question": "A servlet is defined with `1` in web.xml. When is the `init()` method of this servlet called?",
+    "options": [
+      "When the first client request hits the servlet.",
+      "When the server starts (deployment time).",
+      "Every time a request is received.",
+      "When the session is created."
+    ],
+    "answer": 1,
+    "explanation": "A positive integer in `load-on-startup` forces the container to initialize the servlet during deployment, rather than waiting for the first lazy request."
+  },
+  {
+    "question": "You have declared a private instance variable `private double invoiceTotal;` inside your `HttpServlet` class. You calculate this value inside `doPost()`. What is the risk?",
+    "options": [
+      "No risk, each request gets a new instance of the Servlet.",
+      "The variable will be reset to null on every request.",
+      "Serious Race Condition. Servlets are singletons; concurrent requests will overwrite this variable causing data corruption.",
+      "Compilation error, instance variables are not allowed in Servlets."
+    ],
+    "answer": 2,
+    "explanation": "Servlets are singletons in the container. Instance variables are shared across all threads (requests). You must use local variables inside methods for thread safety."
+  },
+  {
+    "question": "Which of the following mechanisms is NOT a valid way for a Servlet container to maintain session tracking?",
+    "options": [
+      "URL Rewriting (jsessionid)",
+      "Cookies",
+      "Hidden Form Fields",
+      "Server-side MAC Address validation"
+    ],
+    "answer": 3,
+    "explanation": "HTTP is stateless. Containers use Cookies, URL Rewriting, or occasionally SSL Session IDs. MAC addresses are part of the Link layer and are not visible to the web server across the internet."
+  },
+  {
+    "question": "What is the key difference between `response.sendRedirect('next.jsp')` and `request.getRequestDispatcher('next.jsp').forward(request, response)`?",
+    "options": [
+      "Redirect preserves the request object; Forward creates a new request.",
+      "Forward is handled entirely on the server side; Redirect involves a round-trip to the client browser.",
+      "Redirect is faster than Forward.",
+      "Forward changes the URL in the browser address bar; Redirect does not."
+    ],
+    "answer": 1,
+    "explanation": "Forward is internal (1 request). Redirect sends a 302 status to the browser, causing the browser to issue a NEW request to the new URL (2 requests)."
+  },
+  {
+    "question": "In a JSP page, you set an attribute using ``. You then use `response.sendRedirect('view.jsp')`. What will `${user}` print in view.jsp?",
+    "options": [
+      "John",
+      "null (or empty string)",
+      "It throws a NullPointerException",
+      "undefined"
+    ],
+    "answer": 1,
+    "explanation": "A `sendRedirect` creates a NEW request. Attributes stored in the previous `request` scope are lost. You would need `session` scope to survive a redirect."
+  },
+  {
+    "question": "Which JSP implicit object is of type `javax.servlet.jsp.PageContext` and provides access to all other implicit objects?",
+    "options": [
+      "application",
+      "config",
+      "pageContext",
+      "session"
+    ],
+    "answer": 2,
+    "explanation": "`pageContext` is the most powerful implicit object in JSP; it acts as a bridge to access request, session, application, and output streams."
+  },
+  {
+    "question": "You retrieve an entity using `session.get(User.class, 1)`. You then close the session. You then modify a field on that User object: `user.setName('New Name')`. What is the state of the entity and will the DB update?",
+    "options": [
+      "State: Persistent. DB updates immediately.",
+      "State: Detached. DB does NOT update automatically.",
+      "State: Transient. DB updates upon re-opening session.",
+      "State: Removed. The object is deleted."
+    ],
+    "answer": 1,
+    "explanation": "Once the session is closed, the entity becomes 'Detached'. Changes to detached objects are not synchronized with the DB unless you explicitly call `update()` or `merge()` on a new session."
+  },
+  {
+    "question": "You have a `Department` entity with a `@OneToMany` list of `Employee`s. The fetch type is set to `LAZY` (default). You call `session.get(Dept.class, 1)`, close the session, and *then* try to access `dept.getEmployees().size()`. What happens?",
+    "options": [
+      "It returns 0.",
+      "It fetches the employees using a new temporary connection.",
+      "It throws a `LazyInitializationException`.",
+      "It returns the count successfully if 2nd Level Cache is enabled."
+    ],
+    "answer": 2,
+    "explanation": "This is the classic Hibernate error. Proxies cannot initialize their data if the parent Session is already closed."
+  },
+  {
+    "question": "In HQL (Hibernate Query Language), what does the query `FROM Employee e WHERE e.department.name = :deptName` demonstrate?",
+    "options": [
+      "Implicit Join",
+      "Native SQL execution",
+      "Stored Procedure call",
+      "Impossible syntax, you must write `JOIN` explicitly."
+    ],
+    "answer": 0,
+    "explanation": "HQL supports 'path expressions'. By traversing `e.department.name`, Hibernate automatically generates the necessary SQL JOIN between Employee and Department tables."
+  },
+  {
+    "question": "Which cache in Hibernate is enabled by default and operates on a per-transaction (per-session) basis?",
+    "options": [
+      "Second Level Cache",
+      "First Level Cache",
+      "Query Cache",
+      "Cluster Cache"
+    ],
+    "answer": 1,
+    "explanation": "The First Level Cache is associated with the `Session` object. It is mandatory and cannot be disabled. It ensures that within one transaction, loading the same ID twice returns the same Java object instance."
+  },
+  {
+    "question": "In Spring, if you have an interface `PaymentGateway` and two classes implementing it (`PayPal` and `Stripe`), both annotated with `@Component`. If you try to `@Autowired PaymentGateway pg;` without any qualifiers, what happens?",
+    "options": [
+      "Spring picks the first one alphabetically.",
+      "Spring picks the one marked with `@Primary`, otherwise throws `NoUniqueBeanDefinitionException`.",
+      "Spring injects null.",
+      "Spring injects a list containing both."
+    ],
+    "answer": 1,
+    "explanation": "Spring requires a unique bean to inject. If multiple matches exist, you must resolve the ambiguity using `@Qualifier` or `@Primary`, otherwise the application fails to start."
+  },
+  {
+    "question": "Which Spring Bean scope guarantees that a new instance of the bean is created every time it is requested from the container?",
+    "options": [
+      "Singleton",
+      "Prototype",
+      "Request",
+      "Session"
+    ],
+    "answer": 1,
+    "explanation": "Singleton (default) is one per container. Prototype is one per request/injection point."
+  },
+  {
+    "question": "In the Spring MVC architecture, which component is responsible for mapping an incoming HTTP request to a specific Controller method?",
+    "options": [
+      "ViewResolver",
+      "HandlerMapping",
+      "DispatcherServlet",
+      "InternalResourceView"
+    ],
+    "answer": 1,
+    "explanation": "The `DispatcherServlet` asks the `HandlerMapping` to find the correct controller method (handler) based on the URL and HTTP method."
+  },
+  {
+    "question": "Which annotation is used in Spring MVC to extract a value directly from the URI path (e.g., `/users/{id}`)?",
+    "options": [
+      "@RequestParam",
+      "@PathVariable",
+      "@RequestBody",
+      "@ModelAttribute"
+    ],
+    "answer": 1,
+    "explanation": "`@PathVariable` binds URI template variables (like {id}) to method parameters. `@RequestParam` is for query parameters (like ?id=1)."
+  },
+  {
+    "question": "What is the primary function of the `@SpringBootApplication` annotation?",
+    "options": [
+      "It connects to the database automatically.",
+      "It is a meta-annotation combining `@Configuration`, `@EnableAutoConfiguration`, and `@ComponentScan`.",
+      "It deploys the application to AWS.",
+      "It turns off the embedded Tomcat server."
+    ],
+    "answer": 1,
+    "explanation": "It is a convenience annotation that packages the three most common annotations used in a Boot app."
+  },
+  {
+    "question": "When a Spring Boot web application is built using the `spring-boot-maven-plugin`, what is the resulting artifact typically, and how is it run?",
+    "options": [
+      "A WAR file that must be deployed to an external Tomcat.",
+      "A Fat/Uber JAR containing embedded Tomcat, run via `java -jar app.jar`.",
+      "A ZIP file containing source code.",
+      "An EXE file for Windows."
+    ],
+    "answer": 1,
+    "explanation": "Spring Boot prioritizes standalone 'Fat JARs' with embedded containers (Tomcat/Jetty/Undertow), making deployment self-contained."
+  },
+  {
+    "question": "You want to externalize configuration (e.g., DB URL). Where does Spring Boot look for `application.properties` by default?",
+    "options": [
+      "Only in the C: drive root.",
+      "In the `/src/main/resources` folder or the classpath root.",
+      "In the System32 folder.",
+      "It must be passed as a command line argument only."
+    ],
+    "answer": 1,
+    "explanation": "Standard location is `src/main/resources`. It also checks the current directory and a `/config` subdirectory."
+  },
+  {
+    "question": "Using Spring Data JPA, if you define a method `List findByLastnameAndFirstname(String l, String f);` in your interface extending `JpaRepository`, what do you need to implement in the class body?",
+    "options": [
+      "You must write the JPQL query manually using @Query.",
+      "Nothing. Spring Data generates the implementation proxy automatically based on the method name.",
+      "You must write the SQL query manually.",
+      "You must implement the DAO class."
+    ],
+    "answer": 1,
+    "explanation": "This is 'Query Creation from Method Names'. Spring parses the name `findBy...` and generates the query logic at runtime."
+  },
+  {
+    "question": "Which annotation allows you to write a custom JPQL or Native SQL query on top of a repository method?",
+    "options": [
+      "@SQL",
+      "@Query",
+      "@Custom",
+      "@Override"
+    ],
+    "answer": 1,
+    "explanation": "`@Query(\"SELECT u FROM User u...\")` allows manual definition when method naming conventions become too complex."
+  },
+  {
+    "question": "In AOP, what do we call the specific point in the execution of the program (e.g., method execution, exception handling) where an aspect can be plugged in?",
+    "options": [
+      "Advice",
+      "Pointcut",
+      "Join Point",
+      "Weaving"
+    ],
+    "answer": 2,
+    "explanation": "A 'Join Point' is the actual event (method call). A 'Pointcut' is the expression that *matches* specific Join Points. 'Advice' is the code taken at that point."
+  },
+  {
+    "question": "Which AOP advice type surrounds the join point, allowing you to control whether the method actually runs, modify its arguments, or change its return value?",
+    "options": [
+      "@Before",
+      "@AfterReturning",
+      "@Around",
+      "@AfterThrowing"
+    ],
+    "answer": 2,
+    "explanation": "`@Around` is the most powerful advice. It requires the `ProceedingJoinPoint` to explicitly call `proceed()` to execute the target method."
+  },
+  {
+    "question": "Which HTTP method is idempotent and is typically used to update an existing resource by replacing it entirely?",
+    "options": [
+      "POST",
+      "PUT",
+      "PATCH",
+      "DELETE"
+    ],
+    "answer": 1,
+    "explanation": "PUT is idempotent (calling it multiple times has the same effect as calling it once) and replaces the resource. POST is not idempotent. PATCH is for partial updates."
+  },
+  {
+    "question": "You have successfully created a new resource via a POST request. What is the most appropriate HTTP status code to return?",
+    "options": [
+      "200 OK",
+      "201 Created",
+      "204 No Content",
+      "202 Accepted"
+    ],
+    "answer": 1,
+    "explanation": "While 200 is often used, 201 Created is the specific standard for successful resource creation, usually accompanied by a 'Location' header."
+  },
+  {
+    "question": "What is the difference between `@Controller` and `@RestController`?",
+    "options": [
+      "`@RestController` includes `@ResponseBody`, implying methods return data (JSON/XML) rather than View names.",
+      "`@Controller` cannot handle POST requests.",
+      "`@RestController` is deprecated.",
+      "There is no difference."
+    ],
+    "answer": 0,
+    "explanation": "`@RestController` is a convenience annotation composed of `@Controller` + `@ResponseBody`."
+  },
+  {
+    "question": "When unit testing a Service layer that depends on a Repository, which annotation is commonly used to create a fake/mock implementation of the Repository to avoid hitting the real database?",
+    "options": [
+      "@Autowired",
+      "@MockBean",
+      "@Test",
+      "@Service"
+    ],
+    "answer": 1,
+    "explanation": "`@MockBean` (from Spring Boot Test) replaces the bean in the context with a Mockito mock, allowing you to define behavior like `given(repo.findById(1)).willReturn(...)`."
+  },
+  {
+    "question": "In Spring Security, which object represents the currently authenticated user's details and authorities?",
+    "options": [
+      "SecurityContextHolder",
+      "Authentication",
+      "Principal",
+      "All of the above (Hierarchically)"
+    ],
+    "answer": 3,
+    "explanation": "SecurityContextHolder holds the SecurityContext, which holds the Authentication object, which holds the Principal (User) and Authorities."
+  },
+  {
+    "question": "What is the primary advantage of using JSON Web Tokens (JWT) over Server-side Sessions for a REST API?",
+    "options": [
+      "JWTs are stateless; the server does not need to store session data, making scaling easier.",
+      "JWTs are always encrypted and sessions are not.",
+      "JWTs never expire.",
+      "JWTs are smaller than Cookies."
+    ],
+    "answer": 0,
+    "explanation": "REST should be stateless. JWT carries the claims/permissions *within* the token signature, so the server just validates the signature without looking up a session in memory/DB."
+  },
+  {
+    "question": "What is the purpose of an API Gateway (like Spring Cloud Gateway) in a microservices architecture?",
+    "options": [
+      "To store the database for all services.",
+      "To act as a single entry point for clients, handling routing, cross-cutting concerns (auth, rate limiting), and aggregation.",
+      "To compile the Java code.",
+      "To replace the frontend UI."
+    ],
+    "answer": 1,
+    "explanation": "It decouples the client from the internal microservice network topology."
+  },
+  {
+    "question": "In a dynamic microservices environment (like using Eureka), why is 'Service Discovery' necessary?",
+    "options": [
+      "Because IP addresses and ports of service instances change dynamically due to scaling and failures.",
+      "To make the internet faster.",
+      "To encrypt the database passwords.",
+      "It is not necessary, hardcoding URLs is better."
+    ],
+    "answer": 0,
+    "explanation": "Cloud native instances are ephemeral. Discovery allows services to find each other by name (Logical ID) rather than physical address."
+  },
+  {
+    "question": "Which JDBC interface is specifically used to call database Stored Procedures?",
+    "options": [
+      "Statement",
+      "PreparedStatement",
+      "CallableStatement",
+      "ProcedureStatement"
+    ],
+    "answer": 2,
+    "explanation": "`CallableStatement` extends `PreparedStatement` and adds methods to handle OUT parameters for stored procedures."
+  },
+  {
+    "question": "In JSP Expression Language, what does the operator `empty` do? E.g., `${empty myList}`",
+    "options": [
+      "Empties the list (clears data).",
+      "Returns true if the list is null or has size 0.",
+      "Throws an exception if the list is not empty.",
+      "Creates a new empty list."
+    ],
+    "answer": 1,
+    "explanation": "The `empty` operator is very useful in UI logic to check for nulls, empty strings, or empty collections/maps safely."
+  },
+  {
+    "question": "If you want to map an Enum to a database column such that the String name of the enum is stored (e.g., 'ACTIVE') instead of the ordinal integer (0), which annotation should be used?",
+    "options": [
+      "@Enumerated(EnumType.STRING)",
+      "@Column(type='string')",
+      "@EnumString",
+      "@Temporal"
+    ],
+    "answer": 0,
+    "explanation": "By default, Hibernate uses Ordinal (int). Using `EnumType.STRING` makes the DB data more readable and robust against enum reordering."
+  },
+  {
+    "question": "Which Spring Boot starter provides production-ready features like health checks, metrics, and environment info endpoints (e.g., `/actuator/health`)?",
+    "options": [
+      "spring-boot-starter-web",
+      "spring-boot-starter-test",
+      "spring-boot-starter-actuator",
+      "spring-boot-starter-security"
+    ],
+    "answer": 2,
+    "explanation": "Actuator is essential for monitoring and managing the application in production."
+  },
+  {
+    "question": "In Spring Data JPA, the methods inherited from `SimpleJpaRepository` (like `save`, `findAll`) are transactional by default. What is their default propagation?",
+    "options": [
+      "REQUIRED (Read-Only for find*, Read-Write for save)",
+      "REQUIRES_NEW",
+      "NEVER",
+      "NOT_SUPPORTED"
+    ],
+    "answer": 0,
+    "explanation": "Spring Data opens a transaction if one doesn't exist (`REQUIRED`). For read operations, it often sets `readOnly=true` for optimization."
+  },
+  {
+    "question": "A client sends a request with `Accept: application/xml`. Your Spring `@RestController` returns a Java Object. What must be present for the response to be XML?",
+    "options": [
+      "Nothing, Java converts to XML automatically.",
+      "The Jackson XML extension (or JAXB) library on the classpath.",
+      "You must change the return type to String.",
+      "The client must send JSON instead."
+    ],
+    "answer": 1,
+    "explanation": "Spring Boot uses `HttpMessageConverters`. By default, it has Jackson for JSON. For XML, you need the `jackson-dataformat-xml` dependency."
+  },
+  {
+    "question": "You have `server.port=8080` in `application.properties` and `SERVER_PORT=9090` in OS Environment Variables. Which port will the app start on?",
+    "options": [
+      "8080",
+      "9090",
+      "Random port",
+      "It will fail to start due to conflict."
+    ],
+    "answer": 1,
+    "explanation": "Spring Boot has a strict property precedence. OS Environment variables override `application.properties` files."
+  },
+  {
+    "question": "In a Spring Cloud microservices setup, what is 'Feign' (or OpenFeign) used for?",
+    "options": [
+      "To configure the database.",
+      "To write declarative REST clients (calling other services via interfaces).",
+      "To secure the passwords.",
+      "To balance the load manually."
+    ],
+    "answer": 1,
+    "explanation": "Feign allows you to define an interface decorated with `@GetMapping` etc., and it generates the implementation to make HTTP calls to other microservices."
+  }
+]

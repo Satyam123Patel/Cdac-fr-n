@@ -1,0 +1,442 @@
+[
+  {
+    "question": "A developer executes the following JDBC code: `int result = statement.executeUpdate(\"UPDATE users SET status = 'active'\");`. If 5 rows are updated, what is the value of `result`?",
+    "options": [
+      "true",
+      "The ResultSet object",
+      "5",
+      "0"
+    ],
+    "answer": 2,
+    "explanation": ""
+  },
+  {
+    "question": "Which design pattern encapsulates data source access and manages database connections?",
+    "options": [
+      "Front Controller",
+      "Data Access Object (DAO)",
+      "Singleton",
+      "View Helper"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "What is the immediate effect of `conn.setAutoCommit(false)`?",
+    "options": [
+      "Connection becomes read-only",
+      "Execution pauses",
+      "A transaction block starts; explicit commit required",
+      "Prevents SQL Injection"
+    ],
+    "answer": 2,
+    "explanation": ""
+  },
+  {
+    "question": "Why is `PreparedStatement` safer against SQL Injection than `Statement`?",
+    "options": [
+      "Newer driver version",
+      "Treats input as parameters, not executable code",
+      "Encrypts data",
+      "Validates data types via annotations"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "When is `init()` called for `@WebServlet(urlPatterns=\"/tasks\", loadOnStartup=1)`?",
+    "options": [
+      "On first request",
+      "During deployment/server startup",
+      "Every request",
+      "Manual instantiation only"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "If `doGet` sets `request.setAttribute(\"a\", 1)` then calls `response.sendRedirect(\"next.jsp\")`, what is `${a}` in JSP?",
+    "options": [
+      "1",
+      "null",
+      "Error",
+      "0"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "Which interface monitors Session creation/destruction?",
+    "options": [
+      "ServletContextListener",
+      "HttpSessionListener",
+      "HttpSessionAttributeListener",
+      "ServletRequestListener"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "Why are instance variables for DB Connections bad in Servlets?",
+    "options": [
+      "Memory usage",
+      "Thread-safety issues (Servlets are singletons)",
+      "Garbage collection issues",
+      "Driver incompatibility"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "Which JSP implicit object accesses `web.xml` context parameters?",
+    "options": [
+      "config",
+      "pageContext",
+      "application",
+      "request"
+    ],
+    "answer": 2,
+    "explanation": ""
+  },
+  {
+    "question": "In EL `${u.addr.city}`, if `addr` is null, what is displayed?",
+    "options": [
+      "NullPointerException",
+      "\"null\"",
+      "Empty string (Nothing)",
+      "Error"
+    ],
+    "answer": 2,
+    "explanation": ""
+  },
+  {
+    "question": "State of object after `session.save(obj)` but before commit?",
+    "options": [
+      "Transient",
+      "Persistent",
+      "Detached",
+      "Removed"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "Accessing a Lazy-loaded collection after Session close results in?",
+    "options": [
+      "Returns 0",
+      "Auto-fetch",
+      "LazyInitializationException",
+      "NullPointerException"
+    ],
+    "answer": 2,
+    "explanation": ""
+  },
+  {
+    "question": "Valid HQL syntax referring to a class?",
+    "options": [
+      "SELECT * FROM emp",
+      "FROM Employee e WHERE e.name=:n",
+      "SELECT col FROM table",
+      "EXEC proc"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "Annotation for Single Table inheritance strategy?",
+    "options": [
+      "@Inheritance(strategy=JOINED)",
+      "@Inheritance(strategy=SINGLE_TABLE)",
+      "@MappedSuperclass",
+      "@TablePerClass"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "Behavior of `@Scope(\"prototype\")`?",
+    "options": [
+      "Shared instance",
+      "New instance per request",
+      "Thread-local",
+      "One per session"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "Accessing method with `@RequestParam(\"id\") int id` without the parameter?",
+    "options": [
+      "id=0",
+      "404",
+      "400 Bad Request",
+      "id=null"
+    ],
+    "answer": 2,
+    "explanation": ""
+  },
+  {
+    "question": "Which stereotype enables DataAccessException translation?",
+    "options": [
+      "@Service",
+      "@Repository",
+      "@Controller",
+      "@Entity"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "Role of DispatcherServlet?",
+    "options": [
+      "View generation",
+      "Front Controller",
+      "DB Connection",
+      "JSP Compiler"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "Meta-annotation for `@Configuration` + `@EnableAutoConfiguration` + `@ComponentScan`?",
+    "options": [
+      "@SpringApp",
+      "@SpringBootConfig",
+      "@SpringBootApplication",
+      "@EnableMVC"
+    ],
+    "answer": 2,
+    "explanation": ""
+  },
+  {
+    "question": "Effect of `findByLastname(String l)` in Spring Data Repository?",
+    "options": [
+      "Manual SQL required",
+      "Auto-generated implementation",
+      "Compilation Error",
+      "Stored Proc call"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "`spring-boot-starter-web` provides?",
+    "options": [
+      "Core jars only",
+      "DB props",
+      "Spring MVC, REST, Embedded Tomcat",
+      "Security"
+    ],
+    "answer": 2,
+    "explanation": ""
+  },
+  {
+    "question": "AOP term for the *expression* matching join points?",
+    "options": [
+      "Aspect",
+      "Join Point",
+      "Pointcut",
+      "Advice"
+    ],
+    "answer": 2,
+    "explanation": ""
+  },
+  {
+    "question": "Idempotent HTTP method for updates?",
+    "options": [
+      "POST",
+      "PUT",
+      "PATCH",
+      "CREATE"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "Role of Service Discovery (Eureka)?",
+    "options": [
+      "Encryption",
+      "Database",
+      "Dynamic location finding (IP/Port)",
+      "UI serving"
+    ],
+    "answer": 2,
+    "explanation": ""
+  },
+  {
+    "question": "Object holding current authenticated user details?",
+    "options": [
+      "SecurityContextHolder",
+      "UserDetailsService",
+      "WebSecurityConfig",
+      "AuthManager"
+    ],
+    "answer": 0,
+    "explanation": ""
+  },
+  {
+    "question": "Which annotation is used to bind the HTTP Request Body (JSON) to a Java Object in a RestController?",
+    "options": [
+      "@RequestParam",
+      "@PathVariable",
+      "@RequestBody",
+      "@ResponseBody"
+    ],
+    "answer": 2,
+    "explanation": ""
+  },
+  {
+    "question": "In Spring Boot, where are external configurations like `server.port` typically defined?",
+    "options": [
+      "web.xml",
+      "pom.xml",
+      "application.properties",
+      "dispatcher-servlet.xml"
+    ],
+    "answer": 2,
+    "explanation": ""
+  },
+  {
+    "question": "Which interface should a Spring Boot Bean implement to execute code immediately after the application starts?",
+    "options": [
+      "ServletContextListener",
+      "CommandLineRunner",
+      "Runnable",
+      "InitializingBean"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "What is the return type of `CrudRepository.findById(ID id)` in recent Spring Data versions?",
+    "options": [
+      "Entity",
+      "Optional<Entity>",
+      "List<Entity>",
+      "Boolean"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "Which JPA annotation creates a primary key that auto-increments?",
+    "options": [
+      "@Id",
+      "@GeneratedValue(strategy=GenerationType.IDENTITY)",
+      "@Column(unique=true)",
+      "@NotNull"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "What happens if you define two Beans of the same type and try to `@Autowired` one without a `@Qualifier`?",
+    "options": [
+      "The first defined bean is injected.",
+      "Application fails to start (NoUniqueBeanDefinitionException).",
+      "Both are injected as a List.",
+      "Null is injected."
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "In a REST API, which HTTP Status code represents \"Created\" (successful resource creation)?",
+    "options": [
+      "200",
+      "201",
+      "204",
+      "401"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "Which Spring Security filter chain mechanism allows you to configure public vs private URLs?",
+    "options": [
+      "UserDetailsService",
+      "SecurityFilterChain / HttpSecurity",
+      "PasswordEncoder",
+      "AuthenticationProvider"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "What is the main purpose of an API Gateway in Microservices (e.g., Spring Cloud Gateway)?",
+    "options": [
+      "Store data.",
+      "Single entry point for routing requests to various microservices.",
+      "Generate HTML.",
+      "Compile Java code."
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "In Hibernate, which fetch type loads the associated data immediately with the parent?",
+    "options": [
+      "LAZY",
+      "EAGER",
+      "PERSIST",
+      "MERGE"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "Which annotation is used in JUnit/Spring Boot Test to mock a Service layer bean?",
+    "options": [
+      "@Autowired",
+      "@MockBean",
+      "@TestBean",
+      "@Service"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "What is JWT (JSON Web Token) primarily used for in modern REST APIs?",
+    "options": [
+      "Encrypting database passwords.",
+      "Stateless Authentication and Authorization.",
+      "Compressing JSON data.",
+      "Formatting dates."
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "In Spring MVC, how do you access a value from the URI path, e.g., `/users/{id}`?",
+    "options": [
+      "@RequestParam",
+      "@PathVariable",
+      "@MatrixVariable",
+      "@BodyParam"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "Which JSTL tag is used to iterate over a list in a JSP?",
+    "options": [
+      "<c:loop>",
+      "<c:forEach>",
+      "<jsp:iterate>",
+      "<c:while>"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "question": "What does `@Transactional` do when applied to a Service method?",
+    "options": [
+      "Connects to the internet.",
+      "Wraps the method execution; commits on success, rollbacks on RuntimeException.",
+      "Logs the method execution time.",
+      "Makes the method synchronized."
+    ],
+    "answer": 1,
+    "explanation": ""
+  }
+]

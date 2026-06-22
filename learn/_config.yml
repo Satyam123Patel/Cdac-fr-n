@@ -1,0 +1,15 @@
+title: Learn
+description: My learning documentation site
+remote_theme: just-the-docs/just-the-docs
+
+url: https://yadnyeshkolte.github.io
+baseurl: /learn
+
+search_enabled: true
+
+# Navigation structure
+nav_sort: case_insensitive
+
+aux_links:
+  "View on GitHub":
+    - "https://github.com/yadnyeshkolte/learn"

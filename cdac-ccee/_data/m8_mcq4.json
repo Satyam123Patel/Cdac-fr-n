@@ -1,0 +1,402 @@
+[
+    {
+        "question": "What does ORM stand for?",
+        "options": [
+            "Object Relational Mapping",
+            "Object Resource Management",
+            "Ordered Relational Model",
+            "Object Reference Manager"
+        ],
+        "answer": 0
+    },
+    {
+        "question": "Which approach in EF Core defines models first and generates database?",
+        "options": [
+            "Database First",
+            "Model First",
+            "Code First",
+            "Schema First"
+        ],
+        "answer": 2
+    },
+    {
+        "question": "What does DbContext represent in Entity Framework?",
+        "options": [
+            "A database table",
+            "A database connection and unit of work",
+            "A database column",
+            "A database view"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What does DbSet<T> represent?",
+        "options": [
+            "A set of database settings",
+            "A collection representing a table",
+            "A database connection",
+            "A set of queries"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "Which command creates a new EF Core migration?",
+        "options": [
+            "dotnet ef migrations create",
+            "dotnet ef migrations add",
+            "dotnet ef migrations new",
+            "dotnet ef add migration"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "Which command applies pending migrations to the database?",
+        "options": [
+            "dotnet ef database apply",
+            "dotnet ef database update",
+            "dotnet ef migrations apply",
+            "dotnet ef database migrate"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What is the purpose of [Key] attribute in EF?",
+        "options": [
+            "Define foreign key",
+            "Define primary key",
+            "Define unique constraint",
+            "Define index"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What does [Required] attribute do in EF?",
+        "options": [
+            "Makes column nullable",
+            "Makes column NOT NULL",
+            "Creates an index",
+            "Sets default value"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "Which EF method saves all pending changes to database?",
+        "options": [
+            "CommitChanges()",
+            "SaveChanges()",
+            "UpdateDatabase()",
+            "PersistChanges()"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What is eager loading in Entity Framework?",
+        "options": [
+            "Loading data on demand",
+            "Loading related data immediately with the query",
+            "Loading data in background",
+            "Lazy loading"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "Which method is used for eager loading?",
+        "options": [
+            "Load()",
+            "Include()",
+            "Join()",
+            "Fetch()"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What is the purpose of ThenInclude() in EF Core?",
+        "options": [
+            "Include unrelated entities",
+            "Include nested related entities",
+            "Conditional include",
+            "Exclude entities"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What does FindAsync() method do?",
+        "options": [
+            "Finds entity by any property",
+            "Finds entity by primary key",
+            "Finds multiple entities",
+            "Finds and deletes entity"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What is Fluent API in EF Core?",
+        "options": [
+            "A REST API",
+            "Configuration using method chaining in OnModelCreating",
+            "A GraphQL API",
+            "A SOAP API"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "Which method in DbContext is used for Fluent API configuration?",
+        "options": [
+            "OnConfiguring()",
+            "OnModelCreating()",
+            "OnValidating()",
+            "OnInitializing()"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What is a navigation property in EF?",
+        "options": [
+            "A property for routing",
+            "A property that references related entities",
+            "A property for pagination",
+            "A property for sorting"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What is a Razor Page in ASP.NET Core?",
+        "options": [
+            "A JavaScript page",
+            "A page-based programming model with PageModel",
+            "A CSS framework",
+            "A database page"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What is the purpose of @page directive in Razor Pages?",
+        "options": [
+            "Define page layout",
+            "Mark the file as a Razor Page",
+            "Import namespaces",
+            "Define page styles"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "Which HTTP method does OnGet() handle in Razor Pages?",
+        "options": [
+            "POST",
+            "GET",
+            "PUT",
+            "DELETE"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What does [BindProperty] attribute do in Razor Pages?",
+        "options": [
+            "Binds route parameters",
+            "Two-way binds property to form data",
+            "Binds query strings",
+            "Binds headers"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What is the purpose of Web API?",
+        "options": [
+            "Build desktop applications",
+            "Build HTTP-based services for various clients",
+            "Build mobile apps only",
+            "Build database applications"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "Which HTTP status code indicates successful resource creation?",
+        "options": [
+            "200 OK",
+            "201 Created",
+            "204 No Content",
+            "202 Accepted"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What does 204 No Content status indicate?",
+        "options": [
+            "Resource not found",
+            "Success with no response body",
+            "Server error",
+            "Authentication required"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What does CORS stand for?",
+        "options": [
+            "Cross-Origin Resource Sharing",
+            "Common Origin Request System",
+            "Cross-Object Resource Standard",
+            "Central Origin Resource Service"
+        ],
+        "answer": 0
+    },
+    {
+        "question": "Why is CORS needed?",
+        "options": [
+            "Database security",
+            "Allow controlled access from different origins",
+            "Encrypt data",
+            "Authenticate users"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "Which method allows all origins in CORS configuration?",
+        "options": [
+            "AllOrigins()",
+            "AllowAnyOrigin()",
+            "EnableAllOrigins()",
+            "PermitAllOrigins()"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What is the [FromBody] attribute used for?",
+        "options": [
+            "Bind from query string",
+            "Bind from request body",
+            "Bind from route",
+            "Bind from header"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What is the [FromQuery] attribute used for?",
+        "options": [
+            "Bind from request body",
+            "Bind from query string parameters",
+            "Bind from route",
+            "Bind from form"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "Which library is commonly used for HTTP requests in React?",
+        "options": [
+            "fetch only",
+            "axios",
+            "jQuery only",
+            "XMLHttpRequest"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What is useState hook used for in React?",
+        "options": [
+            "Side effects",
+            "Managing component state",
+            "Routing",
+            "HTTP requests"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What is useEffect hook used for in React?",
+        "options": [
+            "Managing state",
+            "Handling side effects like API calls",
+            "Creating components",
+            "Styling components"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What does an empty dependency array [] in useEffect mean?",
+        "options": [
+            "Run on every render",
+            "Run only on mount",
+            "Never run",
+            "Run on unmount"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What is JWT?",
+        "options": [
+            "JavaScript Web Token",
+            "JSON Web Token",
+            "Java Web Token",
+            "jQuery Web Token"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "How is JWT typically sent in HTTP requests?",
+        "options": [
+            "In query string",
+            "In Authorization header as Bearer token",
+            "In cookies only",
+            "In form data"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What is React Router used for?",
+        "options": [
+            "State management",
+            "Client-side routing",
+            "HTTP requests",
+            "Styling"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "Which hook accesses route parameters in React Router?",
+        "options": [
+            "useRoute()",
+            "useParams()",
+            "useRouter()",
+            "useLocation()"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What does useNavigate() hook do?",
+        "options": [
+            "Get current URL",
+            "Programmatically navigate to routes",
+            "Access route params",
+            "Create routes"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What is the default JSON serializer in ASP.NET Core?",
+        "options": [
+            "Newtonsoft.Json",
+            "System.Text.Json",
+            "Json.NET",
+            "FastJson"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "Which attribute excludes a property from JSON serialization?",
+        "options": [
+            "[NotSerialized]",
+            "[JsonIgnore]",
+            "[Exclude]",
+            "[IgnoreJson]"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "What HTTP method is idempotent for updates?",
+        "options": [
+            "POST",
+            "PUT",
+            "PATCH",
+            "GET"
+        ],
+        "answer": 1
+    }
+]

@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VyaparaSetu UBID Intelligence</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">AI for Bharat - Theme 1</p>
+        <h1>VyaparaSetu UBID Intelligence</h1>
+      </div>
+      <div class="status-strip">
+        <span>Synthetic sandbox</span>
+        <span>No source-system changes</span>
+        <span>Explainable decisions</span>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <nav class="side-nav" aria-label="Primary">
+        <button class="nav-item active" data-view="overview">Overview</button>
+        <button class="nav-item" data-view="linking">UBID Linking</button>
+        <button class="nav-item" data-view="review">Reviewer Queue</button>
+        <button class="nav-item" data-view="activity">Activity Intelligence</button>
+        <button class="nav-item" data-view="queries">Govt Queries</button>
+        <button class="nav-item" data-view="submission">Submission</button>
+      </nav>
+
+      <section class="content">
+        <section id="overview" class="view active" aria-labelledby="overview-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Operational cockpit</p>
+              <h2 id="overview-title">Unified business picture from isolated systems</h2>
+            </div>
+            <button class="primary-action" id="rerun-resolution">Run Resolution</button>
+          </div>
+
+          <div class="metric-grid" id="metric-grid"></div>
+
+          <div class="split-layout">
+            <div class="panel">
+              <div class="panel-head">
+                <h3>Resolution Funnel</h3>
+                <span class="muted">auto-link, review, reject</span>
+              </div>
+              <div class="bar-stack" id="resolution-bars"></div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-head">
+                <h3>Current Activity Mix</h3>
+                <span class="muted">per assigned UBID</span>
+              </div>
+              <div class="activity-donut" id="activity-donut"></div>
+              <div class="legend" id="activity-legend"></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3>What This Prototype Proves</h3>
+              <span class="muted">Round 2-ready path</span>
+            </div>
+            <div class="proof-grid">
+              <div>
+                <strong>Anchored UBIDs</strong>
+                <p>Exact PAN/GSTIN matches become high-confidence anchors. Missing identifiers fall back to explainable similarity features.</p>
+              </div>
+              <div>
+                <strong>Human-in-the-loop safety</strong>
+                <p>Ambiguous matches are reviewed, not silently merged. Reviewer outcomes update local calibration weights.</p>
+              </div>
+              <div>
+                <strong>Active intelligence</strong>
+                <p>Inspections, renewals, filings, and consumption signals classify each business as Active, Dormant, or Closed.</p>
+              </div>
+              <div>
+                <strong>Auditable queries</strong>
+                <p>Policy questions return evidence-backed results, including source records, event trails, and confidence scores.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="linking" class="view" aria-labelledby="linking-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Part A</p>
+              <h2 id="linking-title">Explainable UBID linking</h2>
+            </div>
+            <div class="thresholds">
+              <label>
+                Auto-link
+                <input id="auto-threshold" type="range" min="0.75" max="0.98" step="0.01" value="0.90" />
+                <span id="auto-value">0.90</span>
+              </label>
+              <label>
+                Review floor
+                <input id="review-threshold" type="range" min="0.45" max="0.82" step="0.01" value="0.68" />
+                <span id="review-value">0.68</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Master Records</h3>
+              <span class="muted">4 simulated department systems</span>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Dept ID</th>
+                    <th>Department</th>
+                    <th>Business</th>
+                    <th>PIN</th>
+                    <th>PAN/GSTIN</th>
+                    <th>Assigned UBID</th>
+                  </tr>
+                </thead>
+                <tbody id="records-table"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Candidate Link Decisions</h3>
+              <span class="muted">top-ranked pair evidence</span>
+            </div>
+            <div id="candidate-list" class="candidate-list"></div>
+          </div>
+        </section>
+
+        <section id="review" class="view" aria-labelledby="review-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Reviewer safety layer</p>
+              <h2 id="review-title">Ambiguous matches before merge</h2>
+            </div>
+            <span class="review-count" id="review-count">0 pending</span>
+          </div>
+
+          <div id="review-queue" class="review-queue"></div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Reviewer Decision Audit</h3>
+              <span class="muted">runtime feedback loop</span>
+            </div>
+            <div id="review-audit" class="timeline"></div>
+          </div>
+        </section>
+
+        <section id="activity" class="view" aria-labelledby="activity-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Part B</p>
+              <h2 id="activity-title">Active, Dormant, or Closed with evidence</h2>
+            </div>
+            <select id="ubid-picker" aria-label="Choose business"></select>
+          </div>
+
+          <div class="split-layout">
+            <div class="panel">
+              <div class="panel-head">
+                <h3>Business Status</h3>
+                <span class="muted" id="selected-business-meta"></span>
+              </div>
+              <div id="selected-status" class="selected-status"></div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-head">
+                <h3>Unmatched Events</h3>
+                <span class="muted">surfaced for review</span>
+              </div>
+              <div id="unmatched-events" class="unmatched-events"></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Evidence Timeline</h3>
+              <span class="muted">last 18 months</span>
+            </div>
+            <div id="event-timeline" class="timeline"></div>
+          </div>
+        </section>
+
+        <section id="queries" class="view" aria-labelledby="queries-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Decision support</p>
+              <h2 id="queries-title">Queries Karnataka Commerce cannot reliably answer today</h2>
+            </div>
+          </div>
+
+          <div class="query-builder">
+            <label>
+              Status
+              <select id="query-status">
+                <option value="Active">Active</option>
+                <option value="Dormant">Dormant</option>
+                <option value="Closed">Closed</option>
+              </select>
+            </label>
+            <label>
+              Sector
+              <select id="query-sector">
+                <option value="Factory">Factory</option>
+                <option value="Food Processing">Food Processing</option>
+                <option value="Pharma">Pharma</option>
+                <option value="Textiles">Textiles</option>
+                <option value="Any">Any</option>
+              </select>
+            </label>
+            <label>
+              PIN
+              <select id="query-pin">
+                <option value="560058">560058</option>
+                <option value="560022">560022</option>
+                <option value="560043">560043</option>
+                <option value="Any">Any</option>
+              </select>
+            </label>
+            <label>
+              Inspection gap
+              <select id="query-inspection">
+                <option value="18">No inspection in 18 months</option>
+                <option value="12">No inspection in 12 months</option>
+                <option value="0">Ignore inspection gap</option>
+              </select>
+            </label>
+            <button class="primary-action" id="run-query">Run Query</button>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3 id="query-title">Results</h3>
+              <span class="muted" id="query-subtitle"></span>
+            </div>
+            <div id="query-results" class="query-results"></div>
+          </div>
+        </section>
+
+        <section id="submission" class="view" aria-labelledby="submission-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">HackerEarth Idea Phase</p>
+              <h2 id="submission-title">Ready-to-paste submission</h2>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Title</h3>
+            <pre class="copy-box">VyaparaSetu: Explainable UBID and Active Business Intelligence for Karnataka</pre>
+          </div>
+
+          <div class="panel">
+            <h3>Description</h3>
+            <pre class="copy-box" id="submission-copy"></pre>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
